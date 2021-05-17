@@ -353,9 +353,10 @@ class LegendMixin:
                         f'apply in the case of a colorbar legend and should be removed.'
                     )
 
-                self.cmap.set_array(self.hue)
+                cmap = mpl.cm.ScalarMappable(cmap=self.cmap)
+                cmap.set_array(self.hue)
                 try:
-                    plt.gcf().colorbar(self.cmap, ax=self.ax, **legend_kwargs)
+                    plt.gcf().colorbar(cmap, ax=self.ax, **legend_kwargs)
                 except TypeError:
                     raise ValueError(
                         f'The plot is in continuous legend mode, implying a '
